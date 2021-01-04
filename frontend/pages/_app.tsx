@@ -4,6 +4,8 @@ import '@shopify/polaris/dist/styles.css';
 import { AppProvider } from '@shopify/polaris';
 import enTranslations from '@shopify/polaris/locales/en.json';
 
+import Navigation from '../components/Navigation';
+
 // import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 // const client = new ApolloClient({
@@ -22,6 +24,7 @@ import enTranslations from '@shopify/polaris/locales/en.json';
 const MyApp = ({ Component, pageProps }) => {
   return (
     <AppProvider i18n={enTranslations}>
+      <Navigation />
       <Component {...pageProps} />;
     </AppProvider>
   );

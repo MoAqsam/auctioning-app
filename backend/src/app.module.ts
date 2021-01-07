@@ -11,6 +11,8 @@ const db_url =
 @Module({
   imports: [
     GraphQLModule.forRoot({
+      introspection: true,
+      playground: true,
       autoSchemaFile: 'schema.gql',
       formatError: (error: GraphQLError) => {
         const graphQLFormattedError: GraphQLFormattedError = {
@@ -26,7 +28,7 @@ const db_url =
       synchronize: false,
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [],
   providers: [],

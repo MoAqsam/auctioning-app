@@ -1,10 +1,11 @@
+import Hello from '../components/HelloWorld';
 import Meta from '../components/Meta';
 import styles from '../scss/Home.module.scss';
 
 const Home: React.FC = () => (
   <div className={styles.container}>
     <Meta />
-
+    <Hello />
     <main className={styles.main}>
       <h1 className={styles.title}>Welcome to the Auctioning App</h1>
 

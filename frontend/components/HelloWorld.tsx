@@ -2,14 +2,13 @@ import { gql, useQuery } from '@apollo/client';
 
 const GET_GREETING = gql`
   query {
-    profile {
-      name
-      id
+    helloworld {
+      message
     }
   }
 `;
 
-function Hello() {
+const Hello: React.FC = () => {
   const { loading, data } = useQuery(GET_GREETING);
 
   if (loading)
@@ -20,11 +19,9 @@ function Hello() {
     );
   return (
     <>
-      {data.profile.map((profile) => (
-        <li key={profile.id}>{profile.name}</li>
-      ))}
+      <h1>{data.helloworld.message}</h1>
     </>
   );
-}
+};
 
 export default Hello;

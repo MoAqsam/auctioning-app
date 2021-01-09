@@ -1,4 +1,12 @@
-import { Args, InputType, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Field,
+  InputType,
+  Mutation,
+  ObjectType,
+  Query,
+  Resolver,
+} from '@nestjs/graphql';
 import { User } from './users.model';
 import { UsersService } from './users.service';
 import { UseGuards } from '@nestjs/common';
@@ -18,6 +26,14 @@ export class UsersResolver {
     return await this.userService.find();
   }
 
+  // placeholder query
+  @Query(() => Message, { name: 'helloworld' })
+  async helloworld(): Promise<Message> {
+    const message = new Message();
+    message.message = 'hello world';
+    return message;
+  }
+
   @Mutation(() => User)
   async createUser(
     @Args('username') username: string,
@@ -26,4 +42,10 @@ export class UsersResolver {
     const user = new User({ username, password });
     return this.userService.createUser(user);
   }
+}
+
+@ObjectType()
+class Message {
+  @Field()
+  message: string;
 }

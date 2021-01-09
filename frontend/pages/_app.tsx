@@ -12,7 +12,7 @@ const client = new ApolloClient({
   uri: process.env.endpoint
 });
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp: React.FC = ({ Component, pageProps }) => {
   return (
     <ApolloProvider client={client}>
       <AppProvider i18n={enTranslations}>

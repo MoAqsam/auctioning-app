@@ -13,14 +13,14 @@ const Hello: React.FC = () => {
 
   if (loading)
     return (
-      <>
+      <div>
         <p>Loading ...</p>
-      </>
+      </div>
     );
   return (
-    <>
+    <div>
       <h1>{data.helloworld.message}</h1>
-    </>
+    </div>
   );
 };
 

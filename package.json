@@ -1,0 +1,7 @@
+{
+  "name": "@auctioning-app/root",
+  "workspaces": {
+    "packages": ["backend", "frontend"],
+    "nohoist": [""]
+  }
+}

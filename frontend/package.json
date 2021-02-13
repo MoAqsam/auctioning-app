@@ -1,5 +1,5 @@
 {
-  "name": "auctioning-app",
+  "name": "@auctioning-app/react",
   "version": "0.1.0",
   "private": true,
   "scripts": {

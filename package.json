@@ -1,6 +1,9 @@
 {
   "name": "@auctioning-app/root",
   "private": true,
+  "scripts": {
+    "deploy:backend": "git push heroku `git subtree split --prefix backend master`:master --force"
+  },
   "workspaces": {
     "packages": ["backend", "frontend"],
     "nohoist": ["**","**/backend/**", "backend/**", "frontend/**", "**/frontend/**"]

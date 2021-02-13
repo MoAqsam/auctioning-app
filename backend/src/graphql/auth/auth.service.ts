@@ -10,14 +10,11 @@ export class AuthService {
 
   /**
    * @description validates user credentials
-   * @param username
+   * @param email
    * @param password
    */
-  async validateByUsername(
-    username: string,
-    password: string,
-  ): Promise<AuthTokens> {
-    const user = await this.userService.findByUsername(username);
+  async validateByEmail(email: string, password: string): Promise<AuthTokens> {
+    const user = await this.userService.findByEmail(email);
     if (
       user &&
       user.password &&
@@ -29,18 +26,5 @@ export class AuthService {
       };
     }
     throw new UnauthorizedException('username or password incorrect');
-  }
-
-  /**
-   * @description validates user credentials
-   * @param email
-   * @param password
-   */
-  async validateByEmail(email: string, password: string): Promise<any> {
-    const user = await this.userService.findByEmail(email);
-    if (user && (await comparePassword(user.password, password))) {
-      return user;
-    }
-    return null;
   }
 }

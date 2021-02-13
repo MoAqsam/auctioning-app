@@ -17,12 +17,6 @@ const db_url =
       introspection: true,
       playground: true,
       autoSchemaFile: 'schema.gql',
-      formatError: (error: GraphQLError) => {
-        const graphQLFormattedError: GraphQLFormattedError = {
-          message: error.extensions.exception.response.message || error.message,
-        };
-        return graphQLFormattedError;
-      },
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',

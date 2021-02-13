@@ -19,13 +19,6 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-  async findByUsername(username: string): Promise<User> {
-    if (!username) {
-      throw new BadRequestException('username needs to be provided');
-    }
-    return await this.usersRepository.findOne({ username });
-  }
-
   async findByEmail(email: string): Promise<User> {
     if (!email) {
       throw new BadRequestException('email needs to be provided');

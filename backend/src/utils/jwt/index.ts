@@ -1,5 +1,5 @@
 import { User } from '../../graphql/users/users.model';
-import { sign, decode, verify } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { JWT_SECRET } from '../../environments';
 import { UnauthorizedException } from '@nestjs/common';
 
@@ -8,12 +8,11 @@ import { UnauthorizedException } from '@nestjs/common';
  * @param user
  */
 export function generateToken(user: User) {
-  const { id, email, username } = user;
+  const { id, email } = user;
   return sign(
     {
       id,
       email,
-      username,
     },
     JWT_SECRET,
     {
@@ -27,7 +26,7 @@ export async function verifyToken(token: string) {
   await verify(token, JWT_SECRET, (err, response) => {
     if (err) {
       throw new UnauthorizedException(
-        'Authentication token is invalid, please try again.'
+        'Authentication token is invalid, please try again.',
       );
     }
   });

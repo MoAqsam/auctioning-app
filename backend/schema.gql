@@ -4,10 +4,9 @@
 
 type User {
   id: String!
-  email: String!
-  first_name: String!
-  last_name: String!
-  username: String!
+  email: String
+  first_name: String
+  last_name: String
   password: String!
   created_at: DateTime!
   updated_at: DateTime!
@@ -18,33 +17,28 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type Message {
-  message: String!
-}
-
 type AuthTokens {
   accessToken: String!
 }
 
 type Query {
   user(id: String!): User!
-  users: [User!]!
-  helloworld: Message!
   me: User!
-}
-
-type Mutation {
-  createUser(password: String!, username: String!): User!
-  register(input: RegisterInput!): AuthTokens!
   login(input: LoginInput!): AuthTokens!
 }
 
-input RegisterInput {
-  username: String!
+input LoginInput {
+  email: String!
   password: String!
 }
 
-input LoginInput {
-  username: String!
+type Mutation {
+  register(input: RegisterInput!): AuthTokens!
+}
+
+input RegisterInput {
+  first_name: String!
+  last_name: String!
+  email: String!
   password: String!
 }

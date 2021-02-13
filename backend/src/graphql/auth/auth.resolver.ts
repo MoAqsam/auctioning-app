@@ -8,6 +8,7 @@ import { BadRequestException, ForbiddenException } from '@nestjs/common';
 import { generateToken } from '../../utils/jwt';
 import { RegisterInput } from './args/register-input';
 import { hashPassword } from '../../utils/password';
+import { validateEmail } from '../../utils/email';
 
 @Resolver('Auth')
 export class AuthResolver {
@@ -25,12 +26,18 @@ export class AuthResolver {
   async register(@Args('input') input: RegisterInput): Promise<AuthTokens> {
     const user = new User(input);
     if (
-      !user.username ||
+      !user.email ||
       !user.password ||
-      user.username === '' ||
+      user.email === '' ||
       user.password === ''
     ) {
       throw new BadRequestException('Username or password missing');
+    }
+    if (!validateEmail(user.email)) {
+      throw new BadRequestException('Invalid email');
+    }
+    if (await this.userService.findByEmail(user.email)) {
+      throw new BadRequestException('email already exists');
     }
     user.password = await hashPassword(user.password);
     try {
@@ -44,11 +51,11 @@ export class AuthResolver {
     };
   }
 
-  @Mutation(() => AuthTokens)
+  @Query(() => AuthTokens)
   async login(@Args('input') input: LoginInput): Promise<AuthTokens> {
-    const { username, password } = input;
-    const authentication = await this.authService.validateByUsername(
-      username,
+    const { email, password } = input;
+    const authentication = await this.authService.validateByEmail(
+      email,
       password,
     );
     if (!authentication) {

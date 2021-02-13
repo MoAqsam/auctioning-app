@@ -18,6 +18,13 @@ export class UsersResolver {
       throw new InternalServerErrorException('error');
     }
   }
+  // placeholder query
+  @Query(() => Message, { name: 'helloworld' })
+  async helloworld(): Promise<Message> {
+    const message = new Message();
+    message.message = 'hello world';
+    return message;
+  }
 }
 
 @ObjectType()
